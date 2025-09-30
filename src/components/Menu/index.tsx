@@ -1,13 +1,13 @@
 import {
   HistoryIcon,
   HouseIcon,
-  Lightbulb,
   MoonIcon,
   SettingsIcon,
   SunIcon,
 } from 'lucide-react';
 import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
+import { RouterLink } from '../RouterLink';
 
 type AvailableThemes = 'dark' | 'light';
 export function Menu() {
@@ -32,11 +32,6 @@ export function Menu() {
     });
   }
 
-  function handleHome(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    event.preventDefault();
-    console.log('handleHome');
-  }
-
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
 
@@ -45,23 +40,22 @@ export function Menu() {
 
   return (
     <nav className={styles.menu}>
-      <a
+      <RouterLink
+        href='/'
         className={styles.menuLink}
-        href='#'
         aria-label='Ir para a Home'
         title='Ir para a Home'
-        onClick={handleHome}
       >
         <HouseIcon />
-      </a>
+      </RouterLink>
 
-      <a className={styles.menuLink} href='#'>
+      <RouterLink className={styles.menuLink} href='/history/'>
         <HistoryIcon />
-      </a>
+      </RouterLink>
 
-      <a className={styles.menuLink} href='#'>
+      <RouterLink className={styles.menuLink} href='/settings/'>
         <SettingsIcon />
-      </a>
+      </RouterLink>
 
       <a className={styles.menuLink} href='#' onClick={handleChangeTheme}>
         {nextThemeIcon[theme]}
